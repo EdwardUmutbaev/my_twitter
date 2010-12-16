@@ -1,5 +1,10 @@
 <% if signed_in? %>
-  
+  <% form_for Post.new, :remote => true do |f| %>
+    What are you doing? <br />
+    <%= f.text_area :message, :size => "44x6" %>
+    <%= f.submit "update" %> 
+  <% end %>
+<%= render :partial => "shared/posts_list" %>
 <% else %>
   <p> Welcome </p>
   <%= link_to "Sign up now!", signup_path %>

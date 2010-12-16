@@ -3,12 +3,19 @@ class User < ActiveRecord::Base
 
   validates :username, :presence => true, :length => { :minimum => 3, :maximum => 30 }
   validates :email, :presence => true, :uniqueness => true, :format => { :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-  validates :password, :presence => true, :confirmation => true, :length => => { :minimum => 6, :maximum => 30 }
+  validates :password, :presence => true, :confirmation => true, :length => { :minimum => 6, :maximum => 30 }
 
   before_save :encode_password
 
   attr_accessor :password, :password_confirmation, :current_password
 
+  def all_posts 
+   Post.find(:all, :order => "created_at DESC")
+  end
+
+  def user_posts(user) 
+   Post.find(:all, :conditions => ["user_id in (?)", user.id], :order => "created_at DESC")
+  end
 
   def encode_password
     if self.new_record?

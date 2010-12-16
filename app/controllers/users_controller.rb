@@ -37,6 +37,11 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @user = User.find(params[:id])
+      if @user == current_user
+        @posts = @user.user_posts(current_user)  
+      else
+        @posts = @user.all_posts
+      end
   end
 end
