@@ -1,0 +1,12 @@
+<% unless current_user?(@user) %>
+  <% if current_user.following?(@user) %>
+    <%= form_for current_user.friendships.find_by_followed_id(@user), :html => { :method => :delete }, :remote => true do |f| %>
+      <%= button_to "Unfollow", friendship_path %>
+    <% end %>
+  <% else %>
+    <%= form_for current_user.friendships.build(:followed_id => @user.id), :remote => true do |f| %>
+      <%= f.hidden_field :followed_id %>
+      <%= button_to "Follow", friendships_path %>
+    <% end %>
+  <% end %>
+<% end %>
