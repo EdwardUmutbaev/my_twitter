@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation, :current_password
+  has_attached_file :avatar, :styles => { :medium => "128x128>", :small => "48x48>" }, :default_url => "/system/avatars/default.png"
+                    #:url  => "/assets/images/:id/:style/:basename.:extension",
+                    #:path => ":rails_root/public/assets/images/:id/:style/:basename.:extension"
 
   has_many :posts, :dependent => :destroy
 

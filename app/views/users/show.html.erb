@@ -1,3 +1,20 @@
-<%= image_tag 'Avatar' %>
+<table>
+<tr>
+  <td rowspan="3"> 	<%= image_tag @user.avatar.url(:medium) %>  	</td>
+  <td>  <h2>		<%= @user.username %></h2>  			</td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+</table>
+<% if current_user?(@user) %>
+  <h6><%= link_to 'Edit your profile ->', edit_user_path(current_user) %></h6><br>
+<% end %>
+
 <%= render 'follow_form' if signed_in? %> <br />
 <%= render :partial => "shared/posts_list", :locals => { :posts => @posts} %>

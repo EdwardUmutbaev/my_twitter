@@ -2,15 +2,27 @@
 <html>
 <head>
   <title>MyTwitter</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag :all, 'application' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= render 'layouts/navigation' %>
-
-<%= yield %>
-
+  <div class="layout">	
+    <div class="nav">
+      <%= render 'layouts/navigation' %>	
+    </div> 
+    <div class="layout-inner">
+      <div class="layout-inner2">
+        <div class="content">         
+          <div class="content-inner">
+            <%= yield %>
+          </div>
+          <div class="sidebar">
+            <%= render 'layouts/sidebar' if signed_in? %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

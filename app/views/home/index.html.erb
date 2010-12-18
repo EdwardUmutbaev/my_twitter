@@ -1,11 +1,11 @@
 <% if signed_in? %>
   <% form_for Post.new do |f| %>
-    What are you doing? <br />
-    <%= f.text_area :message, :size => "44x6" %>
-    <%= f.submit "update" %> 
+    What are you doing? <br /><br />
+    <%= f.text_area(:message, :style =>" width: 482px; height: 56px") %>
+    <%= f.submit "Tweet" %> <br /><br />
   <% end %>
 <%= render :partial => "shared/posts_list" %>
 <% else %>
-  <p> Welcome </p>
+  <p><h1> Welcome </h1></p>
   <%= link_to "Sign up now!", signup_path %>
 <%end%>
