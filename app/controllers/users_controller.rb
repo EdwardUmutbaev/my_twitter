@@ -43,5 +43,12 @@ class UsersController < ApplicationController
       else
         @posts = @user.all_posts
       end
+
+    @following = @user.following
+    @following_count = @following.size
+
+    @followers = @user.followers
+    @followers_count = @followers.size
+  
   end
 end

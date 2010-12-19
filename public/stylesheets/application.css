@@ -92,14 +92,16 @@ textarea {
 }
 
 .sidebar {
-    -moz-border-radius: 5px 5px 5px 5px;    
+   -moz-border-radius: 5px 5px 5px 5px;    
     max-width: 460px;
     min-width: 340px;
     float: right;   
     background: repeat scroll 0 0 #99CCFF;
     overflow: hidden;
-    padding: 12px 30px;
+    padding: 12px 20px;
     position: relative;
+  
+   
 }
 
 
