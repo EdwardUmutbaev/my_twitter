@@ -6,6 +6,7 @@ SimpleNavigation::Configuration.run do |navigation|
       user.item :home, 'Home', root_path
     if signed_in?
       user.item :profile, 'Profile', current_user 
+      user.item :users, 'Users', users_path
       user.item :setting, 'Setting', edit_user_path(current_user)       
       user.item :sign_out, 'Sign out', signout_path, :method => :delete      
     else

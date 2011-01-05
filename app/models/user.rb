@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "128x128>", :small => "48x48>" }, :default_url => "/system/avatars/default.png"                  
 
   has_many :posts, :dependent => :destroy
-
   has_many :friendships, :foreign_key => "follower_id", :dependent => :destroy
   has_many :following, :through => :friendships, :source => :followed
   has_many :reverse_friendships, :foreign_key => "followed_id", :class_name => "Friendship", :dependent => :destroy
@@ -19,26 +18,29 @@ class User < ActiveRecord::Base
     friendships.find_by_followed_id(followed)
   end
 
-
   def follow!(followed)
     friendships.create!(:followed_id => followed.id)
   end
 
+  def following_list
+    self.following
+  end
+
+  def followers_list
+    self.followers
+  end
 
   def unfollow!(followed)
     friendships.find_by_followed_id(followed).destroy
   end  
 
-
   def all_posts 
-   Post.find(:all, :conditions => ["user_id in (?)", following.collect{ |followed| followed.id }.push(self.id)], :order => "created_at DESC")
+    Post.find(:all, :conditions => ["user_id in (?)", following.collect{ |followed| followed.id }.push(self.id)], :order => "created_at DESC")
   end
 
-
-  def user_posts(user) 
-   Post.find(:all, :conditions => ["user_id in (?)", user.id], :order => "created_at DESC")
-  end  
-
+  def user_posts 
+    self.posts.order("created_at DESC")
+  end 
 
   def encode_password
     if self.new_record?
@@ -46,7 +48,6 @@ class User < ActiveRecord::Base
     end
     self.encrypted_password = User.encrypt_password(self.password, self.salt)
   end
-
 
   class << self
     def encrypt_password(password, salt)

@@ -1,15 +1,15 @@
-<% if @following.nil? %>
+<% if following.nil? %>
 
 <% else %>
-  Following (<%= @following_count %>)
+  Following (<%= following.size %>)
   <ul>
-    <% for user in @following do %>
+    <% for user in following do %>
       <li><%= link_to user.username, user %></li>
     <% end %>
   </ul>
-  Followers (<%= @followers_count %>)
+  Followers (<%= followers.size %>)
   <ul>
-    <% for user in @followers do %>
+    <% for user in followers do %>
       <li><%= link_to user.username, user %></li>
     <% end %>
   </ul>

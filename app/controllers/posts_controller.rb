@@ -7,7 +7,10 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy   
-    redirect_to :back, :success => 'Post deleted!'
+    @post.destroy  
+    respond_to do |format|
+      format.js 
+      format.html       
+    end  
   end
 end

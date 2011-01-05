@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :find_user, :only => [:edit, :update, :show]
+
   def new
     @user = User.new
   end
@@ -13,13 +15,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])   
+  def edit      
   end
 
   def update
-    @user = User.find(params[:id])
-
     if @user.update_attributes(params[:user])
       redirect_to root_path, :success => 'Profile updated.' 
     else     
@@ -36,19 +35,18 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    @user = User.find(params[:id])
-      if @user == current_user
-        @posts = @user.user_posts(current_user)  
-      else
-        @posts = @user.all_posts
-      end
-
-    @following = @user.following
-    @following_count = @following.size
-
-    @followers = @user.followers
-    @followers_count = @followers.size
-  
+  def show 
+    if current_user
+     @posts = @user.user_posts  
+    else
+     @posts = @user.all_posts
+    end        
+    @following = @user.following_list     
+    @followers = @user.followers_list
   end
+
+  protected
+    def find_user
+      @user = User.find(params[:id]) 
+    end
 end

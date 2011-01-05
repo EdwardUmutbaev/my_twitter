@@ -1,10 +1,11 @@
-<% @posts.each do |post|%>  
+<% posts.each do |post|%> 
+<div id="post_<%= post.id %>">
     <table>
     <tr>
-      <td rowspan="3"><%= link_to (image_tag post.user.avatar.url(:small), :border=>0), post.user %> </td>
+      <td rowspan="3"><%= link_to (image_tag post.user_avatar.url(:small), :border=>0), post.user %> </td>
     </tr>
     <tr>      
-      <td colspan="3"><b> <%= link_to post.user.username, post.user %></b> </td>		
+      <td colspan="3"><b> <%= link_to post.user_username, post.user %></b> </td>		
     </tr>
     <tr>          
       <td><%= post.message %> </td>
@@ -13,8 +14,10 @@
      <td></td>
      <td class="time"> <%= distance_of_time_in_words_to_now(post.created_at) %> ago </i>
       <% if current_user?(post.user) %>  
-        <%= link_to (image_tag 'icon_delete.gif', :border => false), post, :confirm => 'Are you sure you want to delete this tweet?', :method => :delete %>
+        <%= link_to (image_tag 'icon_delete.gif', :border => false), post, :method => :delete, :remote=>true, :confirm => 'Are you sure you want to delete this tweet?'%>
       <% end %> </td>       
     </tr>      
     </table> <hr>
+</div>
 <% end %>
+

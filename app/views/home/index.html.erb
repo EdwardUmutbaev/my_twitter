@@ -4,10 +4,13 @@
     <%= f.text_area(:message, :style =>" width: 482px; height: 56px") %>
     <%= f.submit "Tweet" %> <br /><br />
   <% end %>
-<%= render :partial => "shared/posts_list" %>
+<div id="posts">
+<%= render :partial => "shared/posts_list", :locals => { :posts => @posts } %>
+</div>
 <% else %>
   <p><h1> Welcome </h1></p>
   <%= link_to "Sign up now!", signup_path %>
 <%end%>
+
 
 

@@ -18,7 +18,7 @@
            <%= yield %>              
           </div> 
           <div class="sidebar">
-             <%=  render :partial => "shared/following" if signed_in? %>
+             <%=  render :partial => "shared/following", :locals => { :following => @following, :followers => @followers } if signed_in? %>
           </div>
         </div>
       </div>

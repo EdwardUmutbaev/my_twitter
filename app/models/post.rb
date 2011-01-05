@@ -3,4 +3,6 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :user_id, :message
   validates :message, :length => { :minimum => 2, :maximum => 140 }
+
+  delegate :username, :avatar, :to => :user, :prefix => true
 end
