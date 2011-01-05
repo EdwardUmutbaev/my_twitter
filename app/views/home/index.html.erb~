@@ -1,6 +1,0 @@
-<% if signed_in? %>
-  
-<% else %>
-  <p> Welcome </p>
-  <%= link_to "Sign up now!", signup_path %>
-<%end%>
